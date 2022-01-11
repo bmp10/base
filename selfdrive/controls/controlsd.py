@@ -51,13 +51,15 @@ EventName = car.CarEvent.EventName
 class Controls:
   def __init__(self, sm=None, pm=None, can_sock=None):
     config_realtime_process(4 if TICI else 3, Priority.CTRL_HIGH)
-
+    
+    '''
     self.accel_pressed = False
     self.decel_pressed = False
     self.accel_pressed_last = 0.
     self.decel_pressed_last = 0.
     self.fastMode = False
-
+    '''
+    
     # Setup sockets
     self.pm = pm
     if self.pm is None:
@@ -368,7 +370,8 @@ class Controls:
     """Compute conditional state transitions and execute actions on state transitions"""
 
     self.v_cruise_kph_last = self.v_cruise_kph
-
+    
+    '''
     cur_time = self.sm.frame * DT_CTRL
 
     # if stock cruise is completely disabled, then we can use our own set speed logic
@@ -399,6 +402,17 @@ class Controls:
         self.fastMode = False          
     elif self.CP.pcmCruise and CS.cruiseState.enabled:
       self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
+    '''
+    """Compute conditional state transitions and execute actions on state transitions"""
+
+    self.v_cruise_kph_last = self.v_cruise_kph
+
+    # if stock cruise is completely disabled, then we can use our own set speed logic
+    if not self.CP.pcmCruise:
+      self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled)
+    elif self.CP.pcmCruise and CS.cruiseState.enabled:
+      self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
+
 
     # decrease the soft disable timer at every step, as it's reset on
     # entrance in SOFT_DISABLING state
