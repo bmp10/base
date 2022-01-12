@@ -387,7 +387,7 @@ class Controls:
           elif b.type == car.CarState.ButtonEvent.Type.decelCruise:
             self.decel_pressed = False
 
-      self.v_cruise_kph = update_v_cruise(self.v_cruise_kph if self.is_metric else int(round((float(self.v_cruise_kph) * 0.6233 + 0.0995))), CS.buttonEvents, self.enabled and CS.cruiseState.enabled, cur_time, self.accel_pressed,self.decel_pressed, self.accel_pressed_last,self.decel_pressed_last,self.fastMode)
+      self.v_cruise_kph = update_v_cruise(self.v_cruise_kph if self.is_metric else int(round((float(self.v_cruise_kph) * 0.6233 + 0.0995))), CS.buttonEvents, self.enabled, cur_time, self.accel_pressed,self.decel_pressed, self.accel_pressed_last,self.decel_pressed_last,self.fastMode)
       self.v_cruise_kph = self.v_cruise_kph if self.is_metric else int(round((float(round(self.v_cruise_kph))-0.0995)/0.6233))
 
       if(self.accel_pressed or self.decel_pressed):
