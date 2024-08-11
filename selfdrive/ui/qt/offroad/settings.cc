@@ -63,10 +63,16 @@ TogglesPanel::TogglesPanel(QWidget *parent) : QWidget(parent) {
                                   this));
 
   toggles.append(new ParamControl("AlwaysUpdate",
-                                  "Always Update",
+                                  "Update Check",
                                   "Toggle to true for always check for updates, false if you want to never check for updates",
                                   "../assets/offroad/icon_network.png",
                                   this));
+
+  toggles.append(new ParamControl("CheckCamera",
+                                "Check Camera",
+                                "True for check Camera, false to never check",
+                                "../assets/offroad/icon_monitoring.png",
+                                this));
 
   ParamControl *record_toggle = new ParamControl("RecordFront",
                                                  "Record and Upload Driver Camera",
