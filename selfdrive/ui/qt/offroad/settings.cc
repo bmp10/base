@@ -62,6 +62,12 @@ TogglesPanel::TogglesPanel(QWidget *parent) : QWidget(parent) {
                                   "../assets/offroad/icon_network.png",
                                   this));
 
+  toggles.append(new ParamControl("AlwaysUpdate",
+                                  "Always Update",
+                                  "Toggle to true for always check for updates, false if you want to never check for updates",
+                                  "../assets/offroad/icon_network.png",
+                                  this));
+
   ParamControl *record_toggle = new ParamControl("RecordFront",
                                                  "Record and Upload Driver Camera",
                                                  "Upload data from the driver facing camera and help improve the driver monitoring algorithm.",
