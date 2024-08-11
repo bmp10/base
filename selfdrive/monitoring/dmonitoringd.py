@@ -78,7 +78,8 @@ def dmonitoringd_thread(sm=None, pm=None):
     pm.send('driverMonitoringState', dat)
 
 def main(sm=None, pm=None):
-  dmonitoringd_thread(sm, pm)
+  if Params().get_bool("CheckCamera"):
+    dmonitoringd_thread(sm, pm)
 
 if __name__ == '__main__':
   main()
