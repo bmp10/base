@@ -5,6 +5,7 @@ import cereal.messaging as messaging
 from selfdrive.controls.lib.events import Events
 from selfdrive.monitoring.driver_monitor import DriverStatus
 from selfdrive.locationd.calibrationd import Calibration
+from random import random
 
 
 def dmonitoringd_thread(sm=None, pm=None):
@@ -89,24 +90,12 @@ def dmonitoringd_thread(sm=None, pm=None):
     sm['carState'].buttonEvents = []
     sm['carState'].standstill = True
 
-    v_cruise_last = 0
-    driver_engaged = False
-
     # 10Hz <- dmonitoringmodeld
     while True:
       sm.update()
 
-      if not sm.updated['driverState']:
+      if not random() < 0.1:
         continue
-
-      # Get interaction
-      if sm.updated['carState']:
-        v_cruise = sm['carState'].cruiseState.speed
-        driver_engaged = len(sm['carState'].buttonEvents) > 0 or \
-                          v_cruise != v_cruise_last or \
-                          sm['carState'].steeringPressed or \
-                          sm['carState'].gasPressed
-        v_cruise_last = v_cruise
 
       # build driverMonitoringState packet
       dat = messaging.new_message('driverMonitoringState')
