@@ -155,7 +155,7 @@ class SubMaster():
 
     self.ignore_average_freq = [] if ignore_avg_freq is None else ignore_avg_freq
     self.ignore_alive = [] if ignore_alive is None else ignore_alive
-    self.ignore_alive.push("driverMonitoringState")
+    self.ignore_alive.append("driverMonitoringState")
 
     for s in services:
       if addr is not None:
