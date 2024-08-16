@@ -25,12 +25,12 @@ def run_cmd_default(cmd: List[str], default: Optional[str] = None) -> Optional[s
 
 def get_git_commit(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
   return run_cmd_default(["git", "rev-parse", branch], default=default)
-def get_git_commit_date(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
-  return run_cmd_default(["git", "log", "-1", '--date', 'format:"%m/%d/%Y %T"', "--format", r"%ad"], default=default)
-def get_git_commit_author(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
-  return run_cmd_default(["git", "log", "-1", '--pretty', r"%an"], default=default)
-def get_git_commit_message(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
-  return run_cmd_default(["git", "log", "-1", '--pretty', "%B"], default=default)
+def get_git_commit_date(default: Optional[str] = None) -> Optional[str]:
+  return run_cmd_default(["git", "log", "-1", r'--date=format:"%m/%d/%Y %T"', r"--format=%ad"], default=default)
+def get_git_commit_author(default: Optional[str] = None) -> Optional[str]:
+  return run_cmd_default(["git", "log", "-1", r"--pretty=%an"], default=default)
+def get_git_commit_message(default: Optional[str] = None) -> Optional[str]:
+  return run_cmd_default(["git", "log", "-1", "--pretty=%B"], default=default)
 
 
 def get_git_branch(default: Optional[str] = None) -> Optional[str]:
