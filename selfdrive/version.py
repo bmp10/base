@@ -6,6 +6,8 @@ from typing import List, Optional
 from common.basedir import BASEDIR
 from selfdrive.swaglog import cloudlog
 
+from datetime import datetime
+
 
 TESTED_BRANCHES = ['devel', 'release2-staging', 'release3-staging', 'dashcam-staging', 'release2', 'release3', 'dashcam']
 
@@ -23,6 +25,12 @@ def run_cmd_default(cmd: List[str], default: Optional[str] = None) -> Optional[s
 
 def get_git_commit(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
   return run_cmd_default(["git", "rev-parse", branch], default=default)
+def get_git_commit_date(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
+  return run_cmd_default(["git", "log", "-1", '--date', 'format:"%m/%d/%Y %T"', "--format", r"%ad"], default=default)
+def get_git_commit_author(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
+  return run_cmd_default(["git", "log", "-1", '--pretty', r"%an"], default=default)
+def get_git_commit_message(branch: str = "HEAD", default: Optional[str] = None) -> Optional[str]:
+  return run_cmd_default(["git", "log", "-1", '--pretty', "%B"], default=default)
 
 
 def get_git_branch(default: Optional[str] = None) -> Optional[str]:

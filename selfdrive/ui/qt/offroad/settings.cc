@@ -215,6 +215,9 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
 SoftwarePanel::SoftwarePanel(QWidget* parent) : QWidget(parent) {
   gitBranchLbl = new LabelControl("Git Branch");
   gitCommitLbl = new LabelControl("Git Commit");
+  gitCommitDateLbl = new LabelControl("Git Commit Date");
+  gitCommitAuthorLbl = new LabelControl("Git Commit Author");
+  gitCommitMessageLbl = new LabelControl("Git Commit Message");
   osVersionLbl = new LabelControl("OS Version");
   versionLbl = new LabelControl("Version", "", QString::fromStdString(params.get("ReleaseNotes")).trimmed());
   lastUpdateLbl = new LabelControl("Last Update Check", "", "The last time openpilot successfully checked for an update. The updater only runs while the car is off.");
@@ -231,7 +234,7 @@ SoftwarePanel::SoftwarePanel(QWidget* parent) : QWidget(parent) {
   });
 
   QVBoxLayout *main_layout = new QVBoxLayout(this);
-  QWidget *widgets[] = {versionLbl, lastUpdateLbl, updateBtn, gitBranchLbl, gitCommitLbl, osVersionLbl};
+  QWidget *widgets[] = {versionLbl, lastUpdateLbl, updateBtn, gitBranchLbl, gitCommitLbl, gitCommitDateLbl, gitCommitAuthorLbl, gitCommitMessageLbl, osVersionLbl};
   for (int i = 0; i < std::size(widgets); ++i) {
     main_layout->addWidget(widgets[i]);
     main_layout->addWidget(horizontal_line());
@@ -276,6 +279,9 @@ void SoftwarePanel::updateLabels() {
   updateBtn->setEnabled(true);
   gitBranchLbl->setText(QString::fromStdString(params.get("GitBranch")));
   gitCommitLbl->setText(QString::fromStdString(params.get("GitCommit")).left(10));
+  gitCommitDateLbl->setText(QString::fromStdString(params.get("GitCommitDate")));
+  gitCommitAuthorLbl->setText(QString::fromStdString(params.get("GitCommitAuthor")));
+  gitCommitMessageLbl->setText(QString::fromStdString(params.get("GitCommitMessage")));
   osVersionLbl->setText(QString::fromStdString(Hardware::get_os_version()).trimmed());
 }
 

@@ -39,6 +39,9 @@ private:
 
   LabelControl *gitBranchLbl;
   LabelControl *gitCommitLbl;
+  LabelControl *gitCommitDateLbl;
+  LabelControl *gitCommitAuthorLbl;
+  LabelControl *gitCommitMessageLbl;
   LabelControl *osVersionLbl;
   LabelControl *versionLbl;
   LabelControl *lastUpdateLbl;

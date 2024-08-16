@@ -20,7 +20,7 @@ from selfdrive.athena.registration import register, UNREGISTERED_DONGLE_ID
 from selfdrive.swaglog import cloudlog, add_file_handler
 from selfdrive.version import dirty, get_git_commit, version, origin, branch, commit, \
                               terms_version, training_version, comma_remote, \
-                              get_git_branch, get_git_remote
+                              get_git_branch, get_git_commit_date, get_git_commit_author, get_git_commit_message, get_git_remote
 
 sys.path.append(os.path.join(BASEDIR, "pyextra"))
 
@@ -70,6 +70,9 @@ def manager_init():
   params.put("TermsVersion", terms_version)
   params.put("TrainingVersion", training_version)
   params.put("GitCommit", get_git_commit(default=""))
+  params.put("GitCommitDate", get_git_commit_date(default=""))
+  params.put("GitCommitAuthor", get_git_commit_author(default=""))
+  params.put("GitCommitMessage", get_git_commit_message(default=""))
   params.put("GitBranch", get_git_branch(default=""))
   params.put("GitRemote", get_git_remote(default=""))
 
