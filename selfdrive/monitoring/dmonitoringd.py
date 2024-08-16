@@ -108,13 +108,10 @@ def dmonitoringd_thread(sm=None, pm=None):
                           sm['carState'].gasPressed
         v_cruise_last = v_cruise
 
-      # Get data from dmonitoringmodeld
-      events = Events()
-
       # build driverMonitoringState packet
       dat = messaging.new_message('driverMonitoringState')
       dat.driverMonitoringState = {
-        "events": [],
+        "events": Events().to_msg(),
         "faceDetected": True,
         "isDistracted": False,
         "awarenessStatus": 1,
