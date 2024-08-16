@@ -157,9 +157,6 @@ class SubMaster():
     self.ignore_average_freq = [] if ignore_avg_freq is None else ignore_avg_freq
     self.ignore_alive = [] if ignore_alive is None else ignore_alive
 
-    if Params().get_bool("CheckCamera"):
-      self.ignore_alive.append("driverMonitoringState")
-
     for s in services:
       if addr is not None:
         p = self.poller if s not in self.non_polled_services else None
@@ -238,6 +235,10 @@ class SubMaster():
   def all_alive_and_valid(self, service_list=None) -> bool:
     if service_list is None:  # check all
       service_list = self.alive.keys()
+
+    if Params().get_bool('driverState'):
+      service_list.remove('driverState')
+      
     return self.all_alive(service_list=service_list) and self.all_valid(service_list=service_list)
 
 class PubMaster():
