@@ -9,6 +9,7 @@ from collections import deque
 
 from cereal import log
 from cereal.services import service_list
+from common.params import Params
 
 assert MultiplePublishersError
 assert MessagingError
@@ -155,7 +156,9 @@ class SubMaster():
 
     self.ignore_average_freq = [] if ignore_avg_freq is None else ignore_avg_freq
     self.ignore_alive = [] if ignore_alive is None else ignore_alive
-    self.ignore_alive.append("driverMonitoringState")
+
+    if Params().get_bool("CheckCamera"):
+      self.ignore_alive.append("driverMonitoringState")
 
     for s in services:
       if addr is not None:
