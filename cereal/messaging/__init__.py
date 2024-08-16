@@ -236,9 +236,9 @@ class SubMaster():
     if service_list is None:  # check all
       service_list = self.alive.keys()
 
-    if Params().get_bool('driverState'):
+    if Params().get_bool('CheckCamera'):
       service_list.remove('driverState')
-      
+
     return self.all_alive(service_list=service_list) and self.all_valid(service_list=service_list)
 
 class PubMaster():
