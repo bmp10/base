@@ -237,7 +237,9 @@ class SubMaster():
       service_list = self.alive.keys()
 
     if Params().get_bool('CheckCamera'):
-      service_list.remove('driverState')
+      service_list.remove('driverCameraState')
+      service_list.remove('driverMonitoringState')
+      
 
     return self.all_alive(service_list=service_list) and self.all_valid(service_list=service_list)
 
